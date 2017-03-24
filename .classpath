@@ -28,13 +28,14 @@
 	<classpathentry kind="lib" path="libs/junit-addons-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/opencsv-3.3.jar"/>
 	<classpathentry kind="lib" path="libs/peersim-doclet.jar"/>
-	<classpathentry kind="lib" path="libs/peersim.jar" sourcepath="/ps/src"/>
 	<classpathentry kind="lib" path="libs/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="libs/src.jar"/>
 	<classpathentry kind="lib" path="libs/stax-1.2.0.jar"/>
 	<classpathentry kind="lib" path="libs/stax2-api-3.1.1.jar"/>
 	<classpathentry kind="lib" path="libs/woodstox-core-asl-4.2.0.jar"/>
 	<classpathentry kind="lib" path="libs/xmlunit-1.6.jar"/>
+	<classpathentry kind="lib" path="peersimlibs/djep-1.0.0.jar"/>
+	<classpathentry kind="lib" path="peersimlibs/jep-2.3.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

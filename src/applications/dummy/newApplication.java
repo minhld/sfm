@@ -194,7 +194,7 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 //		}
 
 		if(isConnected && nodeInfo.getGroupOwner()!=null){
-			callbackMessage cMessage = new callbackMessage(MESSAGE_READ, String.valueOf(value));
+			callbackMessage cMessage = new callbackMessage(MESSAGE_READ, "Hello there");
 
 			if(isGroupeOwner){
 				for(WifiP2pDevice peer: peerList){
@@ -330,11 +330,14 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 		switch (msg.what)
 		{
 		case MESSAGE_READ:
-			double readValue = Double.parseDouble((String) msg.obj);
-			//System.out.println("Value Received: " + readValue);
-
-			value = (Math.abs(readValue-sDeviation.meanValue)>=Math.abs(value-sDeviation.meanValue))? value:readValue;
-			//System.out.println("New value: " + value);
+//			double readValue = Double.parseDouble((String) msg.obj);
+//			//System.out.println("Value Received: " + readValue);
+//
+//			value = (Math.abs(readValue-sDeviation.meanValue)>=Math.abs(value-sDeviation.meanValue))? value:readValue;
+//			//System.out.println("New value: " + value);
+			
+			System.out.println("Received from " + thisNode.getID() + " value " + (String) msg.obj);
+			
 			break;
 		case MY_HANDLE:
 			Visualizer.print("Node: " + thisNode.getID() + " MY_HANDLE", Color.blue);
