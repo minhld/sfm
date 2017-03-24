@@ -747,18 +747,22 @@ public class Visualizer implements Control{
 				// Initialize to avoid null
 				
 				if(nodeInfo.isGroupOwner() && nodeInfo.getStatus()==CONNECTED && wifiManager.getWifiStatus()!=CONNECTED){
+					// when the node is GO and connected with a client not on WIFI
 					nodeColor.setB(0);
 					nodeColor.setG(255);
 					nodeColor.setR(0);
 				}else if(nodeInfo.isGroupOwner() && wifiManager.getWifiStatus()==CONNECTED &&  nodeInfo.getStatus()==CONNECTED){
+					// when the node is GO and connected with a client without WiFi
 					nodeColor.setB(0);
 					nodeColor.setG(0);
 					nodeColor.setR(0);	
 				}else if(!nodeInfo.isGroupOwner() && wifiManager.getWifiStatus()==CONNECTED &&  nodeInfo.getStatus()==CONNECTED){
+					// when the node is client and connected
 					nodeColor.setB(0);
 					nodeColor.setG(0);
 					nodeColor.setR(255);	
 				}else if(!nodeInfo.isGroupOwner() && wifiManager.getWifiStatus()!=CONNECTED && nodeInfo.getStatus()==CONNECTED){
+					// when the node is client and not connected on WiFi
 					nodeColor.setB(254);
 					nodeColor.setG(0);
 					nodeColor.setR(0);	

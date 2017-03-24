@@ -172,13 +172,13 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 		}
 
 		// Standard Group Formation
-				if(cycle%30 ==0 && cycle >20){
-					if(!peerList.isEmpty()){
-						WifiP2pConfig config = new WifiP2pConfig();
-						config.deviceAddress = peerList.get(CommonState.r.nextInt(peerList.size())).deviceAddress;
-						manager.connect(config);
-					}
-				}
+		if(cycle%30 ==0 && cycle >20){
+			if(!peerList.isEmpty()){
+				WifiP2pConfig config = new WifiP2pConfig();
+				config.deviceAddress = peerList.get(CommonState.r.nextInt(peerList.size())).deviceAddress;
+				manager.connect(config);
+			}
+		}
 
 		// Autonamous Group Formation
 //		if(node.getID()%10==0 && !isGroupeOwner && cycle>20){
@@ -198,12 +198,15 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 
 			if(isGroupeOwner){
 				for(WifiP2pDevice peer: peerList){
-					manager.send(cMessage, peer.deviceAddress);
-					Visualizer.print("Node: " + node.getID() + " A message send to client: " + peer.deviceAddress, Color.blue);
+					if ( manager.send(cMessage, peer.deviceAddress).equals("Message Sent!") ) {
+						System.out.println("GO sent a message!");
+						Visualizer.print("Node: " + node.getID() + " A message send to client: " + peer.deviceAddress, Color.blue);
+					}
 				}
 			}else{
-				manager.send(cMessage, String.valueOf(nodeInfo.getGroupOwner().getID()));
-				Visualizer.print("Node: " + node.getID() + " A message send to GO: " + nodeInfo.getGroupOwner().getID(), Color.blue);
+				// sending from client to GO - we do not send messages all the time
+				// manager.send(cMessage, String.valueOf(nodeInfo.getGroupOwner().getID()));
+				// Visualizer.print("Node: " + node.getID() + " A message send to GO: " + nodeInfo.getGroupOwner().getID(), Color.blue);
 			}
 		}
 		cycle++;	

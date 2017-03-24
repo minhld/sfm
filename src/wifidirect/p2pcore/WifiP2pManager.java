@@ -874,7 +874,8 @@ public class WifiP2pManager implements EDProtocol{
 						message.object 		= cMessage;
 						message.srcNode 	= thisNode;
 						message.srcPid 		= thisPid;
-						transport3.send(message.srcNode, message.destNode, message, message.destPid);	
+						transport3.send(message.srcNode, message.destNode, message, message.destPid);
+						System.out.println("From Client " + message.srcNode.getID() + " to GO " + message.destNode.getID());
 						return "Message Sent!";
 					}
 					// if this node is group owner
@@ -890,7 +891,8 @@ public class WifiP2pManager implements EDProtocol{
 							message.object 		= cMessage;
 							message.srcNode 	= thisNode;
 							message.srcPid 		= thisPid;
-							transport3.send(message.srcNode, message.destNode, message, message.destPid);	
+							transport3.send(message.srcNode, message.destNode, message, message.destPid);
+							System.out.println("From GO " + message.srcNode.getID() + " to client " + message.destNode.getID());
 							return "Message Sent!";
 						}
 					}
@@ -906,6 +908,7 @@ public class WifiP2pManager implements EDProtocol{
 							message.srcNode 	= thisNode;
 							message.srcPid 		= thisPid;
 							transport3.send(message.srcNode, message.destNode, message, message.destPid);	
+							System.out.println("[Legacy Client] client " + message.srcNode.getID() + " to " + message.destNode.getID());
 							return "Message Sent!";
 						}	
 					}					
