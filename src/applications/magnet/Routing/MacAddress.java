@@ -48,6 +48,10 @@ public class MacAddress implements Comparable{
         return addr;
     }
 
+    public int getAddress() {
+    	return addr;
+    }
+    
     /**
      * Return whether this mac address is equal to another object.
      * 

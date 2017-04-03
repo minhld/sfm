@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import applications.magnet.Routing.MacAddress;
 import peersim.cdsim.CDProtocol;
 import peersim.config.Configuration;
 import peersim.core.CommonState;
@@ -195,6 +196,7 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 
 		if(isConnected && nodeInfo.getGroupOwner()!=null){
 			callbackMessage cMessage = new callbackMessage(MESSAGE_READ, "Hello there");
+			cMessage.lastHopMacAddr = new MacAddress(node.getIndex());
 
 			if(isGroupeOwner){
 				for(WifiP2pDevice peer: peerList){
@@ -336,7 +338,23 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 //			value = (Math.abs(readValue-sDeviation.meanValue)>=Math.abs(value-sDeviation.meanValue))? value:readValue;
 //			//System.out.println("New value: " + value);
 			
-			System.out.println("Received from " + thisNode.getID() + " value " + (String) msg.obj);
+			System.out.println(thisNode.getID() + " received a message from " + msg.lastHopMacAddr.getAddress() + ": " + (String) msg.obj);
+			
+			// do something and return
+			// create a single callback
+			String rpMsg = thisNode.getID() + "replies back to GO " + msg.lastHopMacAddr.getAddress();
+			
+			// reply back to server
+			if (!nodeInfo.isGroupOwner()) {
+				try {
+					Thread.sleep(10000);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				callbackMessage cMessage = new callbackMessage(MESSAGE_READ, rpMsg);
+				cMessage.lastHopMacAddr = new MacAddress(thisNode.getIndex());
+				manager.send(cMessage, msg.lastHopMacAddr.getAddress() + "");
+			}
 			
 			break;
 		case MY_HANDLE:
@@ -344,5 +362,7 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 			break;
 		}
 	}
+	
+	
 }
 
