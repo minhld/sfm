@@ -342,15 +342,10 @@ GroupInfoListener, DnsSdServiceResponseListener, DnsSdTxtRecordListener, Broadca
 			
 			// do something and return
 			// create a single callback
-			String rpMsg = thisNode.getID() + "replies back to GO " + msg.lastHopMacAddr.getAddress();
+			String rpMsg = thisNode.getID() + " replies back to GO " + msg.lastHopMacAddr.getAddress();
 			
 			// reply back to server
 			if (!nodeInfo.isGroupOwner()) {
-				try {
-					Thread.sleep(10000);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 				callbackMessage cMessage = new callbackMessage(MESSAGE_READ, rpMsg);
 				cMessage.lastHopMacAddr = new MacAddress(thisNode.getIndex());
 				manager.send(cMessage, msg.lastHopMacAddr.getAddress() + "");
